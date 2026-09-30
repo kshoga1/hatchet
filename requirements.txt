@@ -1,5 +1,5 @@
 matplotlib
-pandas<3
+pandas>=2.3
 pydot
 pytest
 codecov

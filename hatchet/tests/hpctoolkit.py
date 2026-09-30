@@ -9,6 +9,7 @@ import os
 
 from hatchet import GraphFrame
 from hatchet.readers.hpctoolkit_reader import HPCToolkitReader
+from pandas.api.types import is_string_dtype
 
 modules = [
     "cpi",
@@ -73,7 +74,7 @@ def test_graphframe(data_dir, calc_pi_hpct_db):
         elif col in ("nid", "rank", "line"):
             assert gf.dataframe[col].dtype == np.int64
         elif col in ("name", "type", "file", "module", "node"):
-            assert gf.dataframe[col].dtype == object
+            assert is_string_dtype(gf.dataframe[col].dtype)
 
     # add tests to confirm values in dataframe
     df = pd.read_csv(str(os.path.join(data_dir, "hpctoolkit-cpi-graphframe.csv")))
@@ -145,7 +146,7 @@ def test_allgather(data_dir, osu_allgather_hpct_db):
         elif col in ("nid", "rank", "thread", "line"):
             assert gf.dataframe[col].dtype == np.int64
         elif col in ("name", "type", "file", "module", "node"):
-            assert gf.dataframe[col].dtype == object
+            assert is_string_dtype(gf.dataframe[col].dtype)
 
     # add tests to confirm values in dataframe
     df = pd.read_csv(str(os.path.join(data_dir, "hpctoolkit-allgather-graphframe.csv")))

@@ -228,7 +228,7 @@ class HPCToolkitReader:
             del self.df_metrics["thread"]
 
         # used to speedup parse_xml_node
-        self.np_metrics = self.df_metrics[self.metric_columns].values
+        self.np_metrics = self.df_metrics[self.metric_columns].to_numpy()
 
         # getting the number of execution threads for our stride in
         # subtract_exclusive_metric_vals/ num nodes is already calculated
