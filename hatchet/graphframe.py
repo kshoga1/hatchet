@@ -1451,8 +1451,9 @@ class GraphFrame:
 
         # case where self is a superset of other
         if snio_len != 0:
-            self_missing_node = self.dataframe["_missing_node"].to_numpy()
-            snio_indices = self_not_in_other.index.to_numpy()
+            # .copy() ensures writable arrays for Cython operations with CoW enabled
+            self_missing_node = self.dataframe["_missing_node"].to_numpy().copy()
+            snio_indices = self_not_in_other.index.to_numpy().copy()
 
             # This function adds 1 to all nodes in self.dataframe['_missing_node'] which
             # are in self but not in the other graphframe
